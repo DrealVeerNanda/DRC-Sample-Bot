@@ -37,6 +37,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
  */
 @TeleOp
 public class MeccanumTeleOp extends LinearOpMode {
+
     //declaring motors
     private DcMotor bl;
     private DcMotor br;
@@ -54,7 +55,7 @@ public class MeccanumTeleOp extends LinearOpMode {
     private double rx; //right stick x
     private double denominator;
 
-    //constant values
+    //servo position constants
     private double rightOpen = 0.4;
     private double leftOpen = 0.7;
     private double rightClosed = .9;
@@ -100,13 +101,16 @@ public class MeccanumTeleOp extends LinearOpMode {
             x = gamepad1.left_stick_x;
             rx = gamepad1.right_stick_x;
 
+            //makes sure that the power set to motor is not under -1 and over 1.
             denominator = Math.max(Math.abs(y) + Math.abs(x) * Math.abs(rx),1);
 
+            //meccanum kinematics
             fl.setPower((y + x + rx)/denominator);
             bl.setPower((y - x + rx)/denominator);
             fr.setPower((y - x - rx)/denominator);
             br.setPower((y + x - rx)/denominator);
 
+            //input conditions
             if(gamepad1.a) {
                 lift0.setPower(.1);
                 lift1.setPower(.1);

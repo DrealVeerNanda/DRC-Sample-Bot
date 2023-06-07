@@ -37,7 +37,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
  */
 @TeleOp
 public class MeccanumTeleOp extends LinearOpMode {
-
+    //declaring motors
     private DcMotor bl;
     private DcMotor br;
     private DcMotor fl;
@@ -54,6 +54,7 @@ public class MeccanumTeleOp extends LinearOpMode {
     private double rx; //right stick x
     private double denominator;
 
+    //constant values
     private double rightOpen = 0.4;
     private double leftOpen = 0.7;
     private double rightClosed = .9;
@@ -61,7 +62,7 @@ public class MeccanumTeleOp extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-
+        //hardware mapping
         //claw servos
         left = hardwareMap.get(Servo.class, "claw1");
         right = hardwareMap.get(Servo.class, "claw0");
@@ -80,7 +81,7 @@ public class MeccanumTeleOp extends LinearOpMode {
         //motor directions and behavior
         fl.setDirection(DcMotorSimple.Direction.REVERSE);
         bl.setDirection(DcMotorSimple.Direction.REVERSE);
-        bl.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        bl.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE); //2 modes, BRAKE and FLOAT. BRAKE will use the motors internal magnetic feild to apply resistance when the power is set to 0, whereas float will let the motor freely spin.
         fl.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         br.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         fr.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -95,7 +96,7 @@ public class MeccanumTeleOp extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()) {
-            y = -gamepad1.left_stick_y;
+            y = -gamepad1.left_stick_y; //gamepad1.(command) will check for inputs in the gamepad. to get another gamepad, use gamepad2.(command)
             x = gamepad1.left_stick_x;
             rx = gamepad1.right_stick_x;
 
@@ -111,17 +112,17 @@ public class MeccanumTeleOp extends LinearOpMode {
                 lift1.setPower(.1);
             } else if(gamepad1.b) {
                 lift0.setPower(-.4);
-                lift1.setPower(-.4);
+                lift1.setPower(-.4); //setPower sets power to the motor, has to be between -1 and 1.
             }
             else if (gamepad1.left_trigger >.5) {
-                left.setPosition(leftClosed);
+                left.setPosition(leftClosed); //setPosition changes the position of a servo. The value has to be between 0 and 1
                 right.setPosition(rightClosed);
             } else if (gamepad1.right_trigger >.5) {
                 left.setPosition(leftOpen);
                 right.setPosition(rightOpen);
             } else {
                 lift0.setPower(-.1);
-                lift1.setPower(-.1);
+                lift1.setPower(-.1); //some small motor power value to make sure the arm doesn't fall when unpowered
             }
 
         }

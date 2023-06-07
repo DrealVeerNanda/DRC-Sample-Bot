@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.drive.opmode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -98,7 +98,8 @@ public class MeccanumTeleOp extends LinearOpMode {
                 lift0.setPower(-.1);
                 lift1.setPower(-.1); //some small motor power value to make sure the arm doesn't fall when unpowered
             }
-
+            //telemetry.addData("what the data is", motorName.getCurrentPosition()); using the getCurrentPosition() function gets the current position of a motor assuming an encoder is plugged in.
+            //telemtry.update(); //you can use encoder data to automate arm movements and get them to whatever position is desired.
         }
     }
 }

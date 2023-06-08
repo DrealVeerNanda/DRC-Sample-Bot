@@ -26,6 +26,7 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 @Config
 @Autonomous(group = "drive")
 public class TrackWidthTuner extends LinearOpMode {
+    //Track Width in Drive Constant needs to be adjusted until the robot actually turns 180 degrees
     public static double ANGLE = 180; // deg
     public static int NUM_TRIALS = 5;
     public static int DELAY = 1000; // ms
@@ -78,7 +79,7 @@ public class TrackWidthTuner extends LinearOpMode {
         telemetry.addLine("Tuning complete");
         telemetry.addLine(Misc.formatInvariant("Effective track width = %.2f (SE = %.3f)",
                 trackWidthStats.getMean(),
-                trackWidthStats.getStandardDeviation() / Math.sqrt(NUM_TRIALS)));
+                trackWidthStats.getStandardDeviation() / Math.sqrt(NUM_TRIALS))); //auto tuner but it breaks sometimse
         telemetry.update();
 
         while (!isStopRequested()) {

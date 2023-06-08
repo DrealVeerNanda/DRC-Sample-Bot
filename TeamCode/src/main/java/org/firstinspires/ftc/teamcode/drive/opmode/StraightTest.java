@@ -17,6 +17,7 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 @Config
 @Autonomous(group = "drive")
 public class StraightTest extends LinearOpMode {
+    //check to make sure that your feedforward tuning worked
     public static double DISTANCE = 60; // in
 
     @Override

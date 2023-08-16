@@ -43,7 +43,7 @@ public class LocalizationTest extends LinearOpMode {
                             input.getY(),
                             -gamepad1.right_stick_x
                     )
-            );
+            ); //feild centric drive
 //            drive.setWeightedDrivePower(
 //                    new Pose2d(
 //                            -gamepad1.left_stick_y,
